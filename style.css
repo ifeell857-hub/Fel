@@ -1,76 +1,143 @@
-/* Custom styles for Totohax V5 */
-body {
-    font-family: 'Inter', sans-serif;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+:root{
+  --bg:#3a0b0b;
+  --muted:#4b1a1a;
+  --accent:#b21e2e;
+  --white:#ffffff;
+  --card-radius:14px;
 }
 
-#vanta-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
+/* Reset & base */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background:linear-gradient(180deg,var(--bg), #2a0707);
+  color:var(--white);
+  -webkit-font-smoothing:antialiased;
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+}
+main{ flex:1; }
+
+/* Banner */
+.banner{ padding:12px; }
+.banner-img{
+  height:160px;
+  border-radius:12px;
+  background:linear-gradient(90deg,#4a0b0b,#6b0f0f);
+  display:flex;align-items:center;justify-content:center;font-weight:800;
+  box-shadow: inset 0 0 40px rgba(0,0,0,0.4);
 }
 
-.container {
-    position: relative;
-    z-index: 1;
+/* Menu strip */
+.menu-strip{ padding:12px; }
+.notice{
+  border:1px solid rgba(255,255,255,0.06);
+  padding:10px;
+  border-radius:10px;
+  margin-bottom:12px;
+  color:#b7f2b5;
 }
 
-.game-card {
-    transition: all 0.3s ease;
+/* Grid container for game-card elements (host elements) */
+.menu-grid{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:18px;
+  padding: 12px;
 }
 
-.game-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(124, 58, 237, 0.5);
+/* Provide layout for custom elements hosts */
+game-card, .menu-item {
+  display:inline-block;
+  width:100%;
 }
 
-.game-card.selected {
-    border: 2px solid #a855f7;
-    background-color: rgba(168, 85, 247, 0.1);
+/* Make game-card hosts taller so internal shadow DOM can show larger images */
+game-card{ height: 180px; }
+
+/* Login methods */
+.login-methods{ padding:12px; }
+.section-title{ margin:12px 0 8px; color:#f8fafc; }
+.methods-grid{
+  display:flex;
+  gap:10px;
+  padding-bottom:24px;
 }
 
-.login-method {
-    transition: all 0.3s ease;
+/* Bubbles layer (full viewport) */
+.bubbles-root{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:50;
 }
 
-.login-method:hover {
-    transform: translateY(-2px);
+/* bubble */
+.bubble{
+  position:absolute;
+  min-width:64px;
+  height:64px;
+  padding:6px;
+  border-radius:50%;
+  background:#fff;
+  color:#111;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  box-shadow:0 10px 24px rgba(0,0,0,0.35);
+  transform-origin:center;
+  transition:transform .36s cubic-bezier(.2,.8,.2,1), opacity .25s;
+  will-change:transform, left, top;
+  cursor:grab;
+  user-select:none;
+  pointer-events:auto;
 }
 
-.login-method.selected {
-    border: 2px solid #d946ef;
-    background-color: rgba(217, 70, 239, 0.1);
+/* overlay: semi-transparent backdrop + centered card */
+.overlay{ position:fixed; inset:0; z-index:60; display:flex; align-items:center; justify-content:center; pointer-events:none; }
+.overlay.hidden{ display:none; }
+.overlay-backdrop{
+  position:absolute; inset:0; background:rgba(0,0,0,0.55);
+  backdrop-filter: blur(2px);
+}
+.overlay-card{
+  position:relative;
+  background:var(--white);
+  color:#111;
+  border-radius:var(--card-radius);
+  padding:28px 20px;
+  width:min(92%, 680px);
+  text-align:center;
+  pointer-events:auto;
+  box-shadow:0 16px 40px rgba(0,0,0,0.6);
+}
+.overlay-close{
+  position:absolute;
+  right:10px; top:8px;
+  border:0; background:transparent; font-size:18px; cursor:pointer;
+}
+.overlay-title{ font-size:28px; font-weight:800; margin-bottom:6px; letter-spacing:1px; }
+.overlay-sub{ color:#333; font-size:14px; opacity:.85 }
+
+/* responsive */
+@media (min-width:1200px) {
+  .menu-grid{ grid-template-columns:repeat(6, 1fr); gap:20px; }
+  game-card{ height:200px; }
+}
+@media (max-width:900px){
+  .menu-grid{ grid-template-columns:repeat(3, 1fr); gap:12px; }
+  game-card{ height:160px; }
+}
+@media (max-width:420px){
+  .menu-grid{ grid-template-columns:repeat(2, 1fr); gap:10px; }
+  game-card{ height:150px; }
+  .overlay-title{ font-size:22px }
+  .bubble{ min-width:56px; height:56px; }
 }
 
-.process-time-btn.selected {
-    background-color: #9333ea;
-    box-shadow: 0 0 0 2px #c026d3;
-}
-
-#progress-messages {
-    max-height: 150px;
-    overflow-y: auto;
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-    width: 6px;
-}
-
-::-webkit-scrollbar-track {
-    background: #1f2937;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #7c3aed;
-    border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #6d28d9;
-}
+/* Small utility tweaks matching Tailwind palette used in index.html */
+.bg-clip-text{ -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
