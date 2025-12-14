@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Totohax V5 - Ultimate Game Access</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#64748b',
+                        secondary: '#ffffff',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-900 text-white min-h-screen">
+    <div id="loading-screen" class="fixed inset-0 z-50 bg-black flex items-center justify-center">
+        <div class="text-center">
+            <div class="animate-pulse mb-6">
+                <i data-feather="codesandbox" class="w-16 h-16 mx-auto text-primary"></i>
+            </div>
+            <video id="promo-video" src="https://example.com/promo.mp4" autoplay muted class="w-full max-w-lg mx-auto"></video>
+        </div>
+    </div>
+
+    <div id="login-screen" class="hidden fixed inset-0 z-40 bg-slate-900 flex items-center justify-center p-4">
+        <div class="bg-slate-800 rounded-xl p-8 max-w-md w-full shadow-2xl">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold text-primary mb-2">TOTOHAX V5</h1>
+                <p class="text-slate-400">Ultimate Game Access Platform</p>
+            </div>
+            <form id="login-form" class="space-y-6">
+                <div>
+                    <label for="username" class="block text-sm font-medium text-slate-300 mb-1">Username/Key</label>
+                    <input type="text" id="username" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-white">
+                </div>
+                <div>
+                    <label for="password" class="block text-sm font-medium text-slate-300 mb-1">Password</label>
+                    <input type="password" id="password" required class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-white">
+                </div>
+                <button type="submit" class="w-full bg-primary hover:bg-slate-600 text-white font-bold py-3 px-4 rounded-lg transition duration-200 flex items-center justify-center">
+                    <i data-feather="log-in" class="mr-2"></i> Sign In
+                </button>
+                <div class="text-center text-slate-400 text-sm">
+                    <a href="#" id="contact-link" class="hover:text-primary transition duration-200">Don't have a key? Contact us</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="main-app" class="hidden min-h-screen">
+        <custom-navbar></custom-navbar>
+        
+        <main class="container mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 space-y-8">
+                    <div class="bg-slate-800 rounded-xl p-6 shadow-lg">
+                        <h2 class="text-xl font-bold text-primary mb-4">Target Information</h2>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-300 mb-1">Game ID/Username/Email</label>
+                                <input type="text" id="target-input" class="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-white" placeholder="Enter your game ID/Username/Email">
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-lg font-semibold text-slate-300 mb-3">Select Game</h3>
+                                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                                    <game-card name="Free Fire" icon="target"></game-card>
+                                    <game-card name="Mobile Legends" icon="crosshair"></game-card>
+                                    <game-card name="Call of Duty" icon="award"></game-card>
+                                    <game-card name="PUBG" icon="map"></game-card>
+                                    <game-card name="Honor of Kings" icon="shield"></game-card>
+                                    <game-card name="Roblox" icon="box"></game-card>
+                                    <game-card name="Delta Force" icon="zap"></game-card>
+                                    <game-card name="eFootball" icon="flag"></game-card>
+                                    <game-card name="Blood Strike" icon="droplet"></game-card>
+                                    <game-card name="Arena Breakout" icon="activity"></game-card>
+                                    <game-card name="Hotel Hideaway" icon="home"></game-card>
+                                    <game-card name="Among Us" icon="users"></game-card>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-lg font-semibold text-slate-300 mb-3">Login Method</h3>
+                                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                                    <method-card name="Google" icon="mail"></method-card>
+                                    <method-card name="Facebook" icon="facebook"></method-card>
+                                    <method-card name="Garena" icon="globe"></method-card>
+                                    <method-card name="Konami" icon="key"></method-card>
+                                    <method-card name="Infinite" icon="infinity"></method-card>
+                                    <method-card name="Twitter" icon="twitter"></method-card>
+                                    <method-card name="Moonton" icon="moon"></method-card>
+                                    <method-card name="Apple" icon="apple"></method-card>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-lg font-semibold text-slate-300 mb-3">Processing Time</h3>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <time-card duration="1 HOUR" price="50.000"></time-card>
+                                    <time-card duration="7 HOURS" price="30.000"></time-card>
+                                </div>
+                            </div>
+                            
+                            <button id="initiate-btn" class="w-full bg-primary hover:bg-slate-600 text-white font-bold py-4 px-4 rounded-lg transition duration-200 flex items-center justify-center mt-6">
+                                <i data-feather="zap" class="mr-2"></i> INITIATE ACCOUNT HACKING
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="progress-section" class="hidden bg-slate-800 rounded-xl p-6 shadow-lg">
+                        <h2 class="text-xl font-bold text-primary mb-4">Hacking Progress</h2>
+                        <div class="space-y-4">
+                            <div class="bg-slate-700 rounded-lg p-4">
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm font-medium text-slate-300">Progress</span>
+                                    <span id="progress-percent" class="text-sm font-medium text-primary">0%</span>
+                                </div>
+                                <div class="w-full bg-slate-600 rounded-full h-2.5">
+                                    <div id="progress-bar" class="bg-primary h-2.5 rounded-full" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-slate-700 rounded-lg p-4 h-48 overflow-y-auto">
+                                <div id="progress-log" class="space-y-2 text-sm font-mono">
+                                    <!-- Progress logs will appear here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="result-section" class="hidden bg-slate-800 rounded-xl p-6 shadow-lg">
+                        <h2 class="text-xl font-bold text-primary mb-4">Hacking Results</h2>
+                        <div class="space-y-4">
+                            <div class="bg-slate-700 rounded-lg p-4">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <p class="text-sm text-slate-400">Game</p>
+                                        <p id="result-game" class="font-medium text-white">-</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-slate-400">Login Method</p>
+                                        <p id="result-method" class="font-medium text-white">-</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-slate-400">Email</p>
+                                        <p id="result-email" class="font-medium text-white">-</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-slate-400">Password</p>
+                                        <div class="flex items-center">
+                                            <p id="result-password" class="font-medium text-white">••••••••</p>
+                                            <button id="show-password-btn" class="ml-2 text-primary hover:text-slate-300">
+                                                <i data-feather="eye"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-8">
+                    <div class="bg-slate-800 rounded-xl p-6 shadow-lg">
+                        <h2 class="text-xl font-bold text-primary mb-4">AI System Explained</h2>
+                        <div class="space-y-4 text-slate-300 text-sm">
+                            <p>Our advanced AI system uses cutting-edge technology to analyze game account patterns and bypass security measures:</p>
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li>Vector prioritization to identify high-value targets</li>
+                                <li>Heuristic analysis to detect security vulnerabilities</li>
+                                <li>Pattern simulation to predict account behaviors</li>
+                                <li>Real-time adaptation to counter security updates</li>
+                            </ul>
+                            <p class="pt-2">The system provides:</p>
+                            <ul class="list-disc pl-5 space-y-2">
+                                <li>95% success rate across all supported games</li>
+                                <li>Fast processing with minimal detection risk</li>
+                                <li>Secure connection and data encryption</li>
+                                <li>Automatic updates for new game versions</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-slate-800 rounded-xl p-6 shadow-lg">
+                        <h2 class="text-xl font-bold text-primary mb-4">Recent Activity</h2>
+                        <div class="space-y-3">
+                            <div class="flex items-start">
+                                <div class="bg-primary rounded-full p-2 mr-3">
+                                    <i data-feather="activity" class="w-4 h-4"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-white">System updated to V5.2</p>
+                                    <p class="text-xs text-slate-400">15 minutes ago</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-primary rounded-full p-2 mr-3">
+                                    <i data-feather="shield" class="w-4 h-4"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-white">New security bypass for Free Fire</p>
+                                    <p class="text-xs text-slate-400">2 hours ago</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="bg-primary rounded-full p-2 mr-3">
+                                    <i data-feather="zap" class="w-4 h-4"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-white">Processing speed improved by 25%</p>
+                                    <p class="text-xs text-slate-400">1 day ago</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <topup-modal></topup-modal>
+        <password-modal></password-modal>
+    </div>
+
+    <script src="components/navbar.js"></script>
+    <script src="components/game-card.js"></script>
+    <script src="components/method-card.js"></script>
+    <script src="components/time-card.js"></script>
+    <script src="components/topup-modal.js"></script>
+    <script src="components/password-modal.js"></script>
+    <script src="script.js"></script>
+    <script>
+        feather.replace();
+    </script>
+<script src="https://huggingface.co/deepsite/deepsite-badge.js"></script>
+</body>
+</html>
